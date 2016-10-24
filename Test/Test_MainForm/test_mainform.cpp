@@ -2,7 +2,9 @@
 #include <QtTest>
 //#include <QtGui>
 //#include <QMainWindow>
-//#include "../../mainwindow.h"
+#include "../../mainwindow.h"
+//#include "../../../build-GameOfLife-Desktop_Qt_5_6_1_MinGW_32bit-Debug/ui_mainwindow.h"
+
 
 class Test_GOL_MainForm : public QObject
 {

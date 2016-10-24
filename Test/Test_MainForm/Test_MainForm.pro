@@ -16,9 +16,10 @@ TEMPLATE = app
 
 
 SOURCES += test_mainform.cpp \
-    #../../mainwindow.cpp
+    ../../mainwindow.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
-    #../../mainwindow.h
+    ../../mainwindow.h \
+    #../../../build-GameOfLife-Desktop_Qt_5_6_1_MinGW_32bit-Debug/ui_mainwindow.h
