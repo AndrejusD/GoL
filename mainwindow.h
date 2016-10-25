@@ -22,7 +22,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     virtual ~MainWindow();
-    //int  recountCoordinates(int ,char );
 
 private slots:
     void on_mousePressedEvent(QGraphicsSceneMouseEvent *event);
@@ -35,14 +34,14 @@ private slots:
     void on_checkBox_stateChanged(int arg1);
     void on_pushButtonClearField_clicked();
     void on_pushButtonAddCells_clicked();
-    void paint();
     void on_checkBoxThreads_stateChanged(int arg1);
-
     void on_pushButtonStep_clicked();
+    void paint();
 
 signals:
 
 private:
+    friend class Test_GOL_MainForm;
     void resizeEvent(QResizeEvent* e);
     int  recountCoordinates(int ,char );
     void setThreads();
@@ -61,8 +60,8 @@ private:
     QTimer *timer;
     QVector<Points*> threads;
     QVector<QPair<int,int>> points_;
-    const int mapTX = -3; // map coordinates corection -3
-    const int mapTY = -4;
+    const int mapTX = 3; // map coordinates corection X+3, Y+4
+    const int mapTY = 4;
     const int boarders = 4;
     int fieldSize;
     int counter;

@@ -59,7 +59,7 @@ void MainWindow::on_mousePressedEvent(QGraphicsSceneMouseEvent *event)
         }
     }
     else{
-        scene->addRect(X + mapTX, Y + mapTY, 7, 7, pen, Qt::green);        
+        scene->addRect(X - mapTX, Y - mapTY, 7, 7, pen, Qt::green);
         auto it = qLowerBound(points_.begin(),points_.end(), XY);
         points_.insert(it,XY);
     }
@@ -127,9 +127,8 @@ void MainWindow::on_pushButtonResetCounter_clicked()
 
 void MainWindow::on_lineEdit_editingFinished()
 {
-    fieldSize = ui->lineEdit->text().toInt();
-    int numberOfCells = fieldSize/2;
-    fieldSize = fieldSize * 4 + 6;
+    int numberOfCells = ui->lineEdit->text().toInt();
+    fieldSize = numberOfCells * 8 + 6;
     ui->graphicsView->setSceneRect(-fieldSize - 20,-fieldSize - 20,fieldSize*2 + 40,fieldSize*2 + 40);
     for(int i=0; i<numberOfThreads; i++)
         threads[i]->setNumberOfCells(numberOfCells);
@@ -202,7 +201,7 @@ void MainWindow::drawField()
     line[0] = scene->addLine(-fieldSize+2,-fieldSize-1,fieldSize,-fieldSize-1,linePen);//upper
     line[1] = scene->addLine(-fieldSize+1,-fieldSize,-fieldSize+1,fieldSize-1,linePen);//left
     line[2] = scene->addLine(-fieldSize+1,fieldSize,fieldSize,fieldSize,linePen);//bottom
-    line[3] = scene->addLine(fieldSize+1,-fieldSize,fieldSize+1,fieldSize-1,linePen);//right
+    line[3] = scene->addLine(fieldSize,-fieldSize,fieldSize,fieldSize-1,linePen);//right
 }
 
 void MainWindow::clearField()
@@ -289,7 +288,7 @@ void MainWindow::paint()
             int Y = itBegin->second;
             if( (Y>Ymin)&&(Y<Ymax) ){
                 int X = itBegin->first;
-                scene->addRect(X*8 + mapTX, Y*8 + mapTY, 7, 7, pen, Qt::green);
+                scene->addRect(X*8 - mapTX, Y*8 - mapTY, 7, 7, pen, Qt::green);
             }
             itBegin++;
         }    
@@ -314,7 +313,7 @@ void MainWindow::resizeEvent(QResizeEvent *e)
 
 int MainWindow::recountCoordinates(int Z, char C)
 {
-    (C == 'X') ? Z-=mapTX : Z-=mapTY;// coordinates ajustment for mouse and maps
+    (C == 'X') ? Z+=mapTX : Z+=mapTY;// coordinates ajustment for mouse and maps
     int z = Z % 8;
     (Z < 0) ? Z-=(z + 8) : Z-=z;
     return Z;

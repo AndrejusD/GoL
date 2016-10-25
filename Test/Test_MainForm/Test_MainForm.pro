@@ -16,10 +16,14 @@ TEMPLATE = app
 
 
 SOURCES += test_mainform.cpp \
-    ../../mainwindow.cpp
+    ../../mainwindow.cpp \
+    ../../customscene.cpp \
+    ../../points.cpp
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 HEADERS += \
     ../../mainwindow.h \
-    #../../../build-GameOfLife-Desktop_Qt_5_6_1_MinGW_32bit-Debug/ui_mainwindow.h
+    ../../customscene.h \
+    ../../points.h \
+    ../../ui_mainwindow.h
